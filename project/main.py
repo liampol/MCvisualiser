@@ -1,19 +1,20 @@
 """
 Markov Chain Visualiser
 
-Author: Liam Pol
+Author: Liam Pol (Github: liampol)
 Created: 20/06/20
 """
 
 from tkinter import *
 from tkinter import ttk
 
+
 class Gui():
     """
     The GUI for Markov Chain Visualiser.
     
         - self.markov_frame is the frame that will contain
-        the Markov Chain (MODEL)
+        the Markov Chain (MODEL/VIEW)
         
         - self.algo_frame is the frame that will contain
         the algorithm selection (VIEW)
@@ -51,11 +52,11 @@ class Gui():
         self.markov_frame.grid(row=0, column=1)
         self.desc_frame.grid(row=1, column=0, columnspan=2)
         
-        
-    
 
 def main():
-    """Entry point into the program"""
+    """
+    Entry point into the program
+    """
     root = Tk()
     gui = Gui(root)
     root.mainloop()
