@@ -4,6 +4,7 @@ Using python package networkx to represent
 Markov Chains.
 """
 
+import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 
@@ -22,19 +23,41 @@ class MarkovChain():
         
     TODO: Fully implement
     """
+    
     def __init__(self, trans_matrix, test_mode=False):
         """
         Markov Chain constructor
+        
+        Performs a check to make sure the transition matrix is valid. Then 
+        constructs a transition diagram from the transition matrix.
         """
+        self.trans_matrix = trans_matrix
         
         if test_mode:
             
-            self.trans_matrix = trans_matrix
+            pass
             
         else:
             
             if self._is_valid_input():
+                
                 np.round(self.trans_matrix)
+                
+                # Add networkx graphing
+                
+                self.trans_diagram = nx.from_numpy_array(self.trans_matrix, 
+                                                parallel_edges=False, 
+                                                create_using=nx.MultiDiGraph)
+                
+                print(f"The graph is: {self.trans_diagram.graph}")
+                
+                print(f"The nodes in the graph are: {self.trans_diagram.nodes}")
+                
+                print(f"The edges in the graph are: {self.trans_diagram.edges}")
+                
+                nx.draw(self.trans_diagram, with_labels=True, arrows = True, 
+                        connectionstyle='arc3, rad = 0.1')
+                
             else:
                 raise ValueError("Not a valid transition matrix")
         
@@ -49,6 +72,25 @@ class MarkovChain():
             and (self.trans_matrix >= 0).all() \
             and (self.trans_matrix <= 1).all() \
             and (np.round(self.trans_matrix.sum(axis=1), 2) <= 1).all()
+    
+    def _create_graph_from_adj_matrix(self):
+        """
+        This function will need to take a transition matrix/adjacency matrix
+        and and construct a transition diagram from it.
+        """
+    
+# Not automated testing, trialing network x graphs.
+
+# Trial 1:
+
+input_data = np.array([[0.0, 0.5, 0.5],
+                       [0.5, 0.0, 0.5],
+                       [0.5, 0.5, 0.0]])
+
+trial_MC = MarkovChain(input_data)
+
+
+
         
         
     
